@@ -1,0 +1,60 @@
+.create-trip-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cover-image-picker {
+  width: 100%;
+  height: 240px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  border: 2px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  margin-bottom: 30px;
+  transition: all 0.2s;
+  overflow: hidden;
+  position: relative;
+}
+
+.cover-image-picker:hover {
+  border-color: var(--primary);
+  background: var(--bg-hover);
+}
+
+.cover-image-picker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cover-image-picker:hover .cover-overlay {
+  opacity: 1;
+}
+
+.date-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .date-inputs { grid-template-columns: 1fr; }
+}
