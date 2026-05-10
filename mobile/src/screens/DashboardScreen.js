@@ -18,7 +18,7 @@ const DashboardScreen = ({ navigation }) => {
             <Text style={styles.userName}>{user?.name}</Text>
           </View>
           <View style={styles.avatar}>
-            <Text style={styles.avatarText}>{user?.name?.charAt(0).toUpperCase()}</Text>
+            <Text style={styles.avatarText}>{user?.name ? user.name.charAt(0).toUpperCase() : 'U'}</Text>
           </View>
         </View>
 

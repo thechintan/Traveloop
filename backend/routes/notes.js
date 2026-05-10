@@ -16,7 +16,7 @@ router.get('/trip/:tripId', authMiddleware, (req, res) => {
 // Create note
 router.post('/', authMiddleware, (req, res) => {
   const { trip_id, stop_id, title, content } = req.body;
-  const result = db.prepare('INSERT INTO trip_notes (trip_id, stop_id, title, content) VALUES (?,?,?,?)').run(trip_id, stop_id || null, title, content);
+  const result = db.prepare('INSERT INTO trip_notes (trip_id, stop_id, title, content) VALUES (?,?,?,?)').run(trip_id, stop_id || null, title || null, content || null);
   res.status(201).json(db.prepare('SELECT * FROM trip_notes WHERE id = ?').get(result.lastInsertRowid));
 });
 
@@ -24,7 +24,7 @@ router.post('/', authMiddleware, (req, res) => {
 router.put('/:id', authMiddleware, (req, res) => {
   const { title, content, stop_id } = req.body;
   db.prepare('UPDATE trip_notes SET title=COALESCE(?,title), content=COALESCE(?,content), stop_id=COALESCE(?,stop_id), updated_at=CURRENT_TIMESTAMP WHERE id=?')
-    .run(title, content, stop_id, req.params.id);
+    .run(title || null, content || null, stop_id || null, req.params.id);
   res.json(db.prepare('SELECT * FROM trip_notes WHERE id = ?').get(req.params.id));
 });
 

@@ -44,7 +44,7 @@ router.get('/profile', authMiddleware, (req, res) => {
 // Update profile
 router.put('/profile', authMiddleware, (req, res) => {
   const { name, language } = req.body;
-  db.prepare('UPDATE users SET name = COALESCE(?, name), language = COALESCE(?, language) WHERE id = ?').run(name, language, req.user.id);
+  db.prepare('UPDATE users SET name = COALESCE(?, name), language = COALESCE(?, language) WHERE id = ?').run(name || null, language || null, req.user.id);
   const user = db.prepare('SELECT id, name, email, avatar_url, language, role FROM users WHERE id = ?').get(req.user.id);
   res.json(user);
 });

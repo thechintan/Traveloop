@@ -40,7 +40,7 @@ router.post('/', authMiddleware, (req, res) => {
   const shareCode = uuidv4().slice(0, 8);
   const result = db.prepare(
     'INSERT INTO trips (user_id, name, description, start_date, end_date, cover_image, share_code) VALUES (?, ?, ?, ?, ?, ?, ?)'
-  ).run(req.user.id, name, description, start_date, end_date, cover_image, shareCode);
+  ).run(req.user.id, name, description || null, start_date || null, end_date || null, cover_image || null, shareCode);
   const trip = db.prepare('SELECT * FROM trips WHERE id = ?').get(result.lastInsertRowid);
   res.status(201).json(trip);
 });
@@ -51,7 +51,7 @@ router.put('/:id', authMiddleware, (req, res) => {
   const trip = db.prepare('SELECT * FROM trips WHERE id = ? AND user_id = ?').get(req.params.id, req.user.id);
   if (!trip) return res.status(404).json({ error: 'Trip not found' });
   db.prepare(`UPDATE trips SET name=COALESCE(?,name), description=COALESCE(?,description), start_date=COALESCE(?,start_date), end_date=COALESCE(?,end_date), cover_image=COALESCE(?,cover_image), is_public=COALESCE(?,is_public) WHERE id=?`)
-    .run(name, description, start_date, end_date, cover_image, is_public, req.params.id);
+    .run(name || null, description || null, start_date || null, end_date || null, cover_image || null, is_public ?? null, req.params.id);
   res.json(db.prepare('SELECT * FROM trips WHERE id = ?').get(req.params.id));
 });
 

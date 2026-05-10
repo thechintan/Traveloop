@@ -9,6 +9,11 @@ import { COLORS } from '../theme/colors';
 // Additional screens that are not tabs
 import CreateTripScreen from '../screens/CreateTripScreen';
 import ItineraryBuilderScreen from '../screens/ItineraryBuilderScreen';
+import BudgetScreen from '../screens/BudgetScreen';
+import PackingScreen from '../screens/PackingScreen';
+import TripNotesScreen from '../screens/TripNotesScreen';
+import AdminDashboardScreen from '../screens/AdminDashboardScreen';
+import SharedItineraryScreen from '../screens/SharedItineraryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +49,56 @@ const RootNavigator = () => {
             options={{ 
               headerShown: true, 
               title: 'Itinerary Builder',
+              headerStyle: { backgroundColor: COLORS.card },
+              headerTintColor: COLORS.text 
+            }} 
+          />
+          <Stack.Screen 
+            name="Budget" 
+            component={BudgetScreen} 
+            options={{ 
+              headerShown: true, 
+              title: 'Budget Breakdown',
+              headerStyle: { backgroundColor: COLORS.card },
+              headerTintColor: COLORS.text 
+            }} 
+          />
+          <Stack.Screen 
+            name="Packing" 
+            component={PackingScreen} 
+            options={{ 
+              headerShown: true, 
+              title: 'Packing Checklist',
+              headerStyle: { backgroundColor: COLORS.card },
+              headerTintColor: COLORS.text 
+            }} 
+          />
+          <Stack.Screen 
+            name="TripNotes" 
+            component={TripNotesScreen} 
+            options={{ 
+              headerShown: true, 
+              title: 'Trip Journal',
+              headerStyle: { backgroundColor: COLORS.card },
+              headerTintColor: COLORS.text 
+            }} 
+          />
+          <Stack.Screen 
+            name="AdminDashboard" 
+            component={AdminDashboardScreen} 
+            options={{ 
+              headerShown: true, 
+              title: 'Admin Analytics',
+              headerStyle: { backgroundColor: COLORS.card },
+              headerTintColor: COLORS.text 
+            }} 
+          />
+          <Stack.Screen 
+            name="SharedItinerary" 
+            component={SharedItineraryScreen} 
+            options={{ 
+              headerShown: true, 
+              title: 'Public Itinerary',
               headerStyle: { backgroundColor: COLORS.card },
               headerTintColor: COLORS.text 
             }} 
